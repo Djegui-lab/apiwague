@@ -43,8 +43,14 @@ st.write("Données depuis Google Sheets :")
 data=pd.DataFrame(data)
 st.write(data)
 
-
-
+#supprimer la première colonne 
+data_new = data.drop(data.columns[0], axis=1)
+# Convertir toutes les colonnes en type int (si possible)
+data_new = data_new.astype(int, errors='ignore')
+data_new.to_csv("nouveau_data.csv", index=False)
+defo= pd.read_csv("nouveau_data.csv")
+st.title(" statistique descriptive de la base de données :")
+st.dataframe(defo.describe().style.background_gradient(cmap="Reds"))
 
 # Convertir la colonne "Ventes" en nombres entiers
 data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
