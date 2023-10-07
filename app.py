@@ -41,6 +41,14 @@ st.write("AUTEUR : DJEGUI-WAUE")
 data=pd.DataFrame(data)
 st.write(data)
 
+
+#convertir tous les colonnes de ma base de données en (int) et ignorer la colonne chaine de caractère
+data_complet= data.astype(int, errors='ignore')
+data_complet.to_csv("new_csv", index=False)
+data_int=pd.read_csv("new_csv")
+
+
+
 #supprimer la première colonne 
 data_new = data.drop(data.columns[0], axis=1)
 # Convertir toutes les colonnes en type int (si possible)
@@ -150,7 +158,7 @@ import sqlite3
 conn = sqlite3.connect('ma_base_de_donnees.db')
 
 # Utiliser la fonction to_sql de pandas pour insérer les données dans une table
-data.to_sql('vente', conn, if_exists='replace', index=False)
+data_int.to_sql('vente', conn, if_exists='replace', index=False)
 # Exécutez une requête SQL pour afficher toutes les données de la table "vente"
 cursor = conn.cursor()
 cursor.execute('SELECT * FROM vente')
@@ -168,7 +176,7 @@ recevoir= cursor.fetchall()
 # Affichez les données dans un DataFrame Streamlit
 new_df = pd.DataFrame(recevoir, columns=[desc[0] for desc in cursor.description])
 st.write(" les courtiers qui ont effectués des ventes > 500 et CB1 > 200")
-st.subheader(" detait de vente :")
+st.subheader(" detaitls des VENTES/CB1 :")
 st.write(new_df)
 
 
