@@ -124,6 +124,60 @@ bar_chart.plotly_chart({
 
 
 
+import pandas as pd
+import sqlite3
+
+
+# Créer une connexion à la base de données (SQLite en l'occurrence)
+conn = sqlite3.connect('ma_base_de_donnees.db')
+
+# Utiliser la fonction to_sql de pandas pour insérer les données dans une table
+data.to_sql('vente', conn, if_exists='replace', index=False)
+# Exécutez une requête SQL pour afficher toutes les données de la table "vente"
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM vente')
+rows = cursor.fetchall()
+
+# Affichez les données dans un DataFrame Streamlit
+df = pd.DataFrame(rows, columns=[desc[0] for desc in cursor.description])
+st.subheader("Base de données Sqlite :")
+st.dataframe(df)
+descriptives= df.describe()
+st.write(descriptives)
+
+cursor.execute('''SELECT Nom, Ventes, CB1 FROM Vente WHERE Ventes > 500 and CB1>200;''')
+recevoir= cursor.fetchall()
+# Affichez les données dans un DataFrame Streamlit
+new_df = pd.DataFrame(recevoir, columns=[desc[0] for desc in cursor.description])
+st.write(" les courtiers qui ont effectués des ventes > 500 et CB1 > 200")
+st.subheader(" detait de vente :")
+st.write(new_df)
+
+
+
+
+tendance_vente=cursor.execute('''SELECT strftime('%Y-%m', datetime('now', 'localtime')) AS mois_actuel, SUM(Ventes) AS total_ventes
+FROM vente;
+''')
+avoir= cursor.fetchall()
+new_d = pd.DataFrame(avoir, columns=[desc[0] for desc in cursor.description])
+
+if st.button("AFFICHER LE TOTAL DES VENTES 0CTOBRE-2023"):
+    st.write(new_d)
+
+
+# Fermer la connexion
+conn.close()
+
+
+
+
+
+
+
+
+
+
 
 
 
