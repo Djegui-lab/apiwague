@@ -52,6 +52,25 @@ defo= pd.read_csv("nouveau_data.csv")
 st.title(" statistique descriptive de la base de données :")
 st.dataframe(defo.describe().style.background_gradient(cmap="Reds"))
 
+
+# Laisser l'utilisateur choisir la colonne de tri
+colonne_tri = st.selectbox("Sélectionnez la colonne de tri :", defo.columns)
+
+# Laisser l'utilisateur choisir l'ordre de tri
+ordre_tri = st.radio("Sélectionnez l'ordre de tri :", ('Ascendant', 'Descendant'))
+
+# Effectuer le tri en fonction des sélections de l'utilisateur
+if ordre_tri == 'Ascendant':
+    data_trie = defo.sort_values(by=colonne_tri, ascending=True)
+else:
+    data_trie = defo.sort_values(by=colonne_tri, ascending=False)
+
+# Afficher les données triées
+st.write("Données triées :")
+st.write(data_trie)
+
+
+
 # Convertir la colonne "Ventes" en nombres entiers
 data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
 
@@ -66,14 +85,15 @@ plt.title("Chiffre d'affaires par courtier")
 plt.xticks(rotation=45, ha="right")
 st.pyplot(plt)
 
- # Création d'un graphique à barres horizontal avec Seaborn
 
+ # Création d'un graphique à barres horizontal avec Seaborn
 fig, ax = plt.subplots()
 sns.barplot(x='Ventes', y='Nom', data=data,  ax=ax)
 ax.set_xlabel("Chiffre d'affaires (en milliers d'euros)")
 ax.set_ylabel('Courtier')
 plt.title("Chiffre d'affaires par courtier")
 st.pyplot(fig)
+
 
 # Sélection du courtier pour afficher les détails
 selected_courtier = st.selectbox('Sélectionnez un courtier:', data['Nom'])
