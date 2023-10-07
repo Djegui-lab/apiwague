@@ -134,7 +134,6 @@ def analyze_data(data):
     return total_ventes
 
 
-st.write(data)
 
 # Analyser les données
 #st.write("Analyse des ventes par courtier :")
