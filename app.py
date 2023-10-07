@@ -167,16 +167,15 @@ rows = cursor.fetchall()
 # Affichez les données dans un DataFrame Streamlit
 df = pd.DataFrame(rows, columns=[desc[0] for desc in cursor.description])
 st.subheader("Base de données Sqlite :")
-st.dataframe(df)
+st.dataframe(df.head())
 descriptives= df.describe()
-st.write(descriptives)
 
 cursor.execute('''SELECT Nom, Ventes, CB1 FROM Vente WHERE Ventes > 500 and CB1>200;''')
 recevoir= cursor.fetchall()
 # Affichez les données dans un DataFrame Streamlit
 new_df = pd.DataFrame(recevoir, columns=[desc[0] for desc in cursor.description])
 st.write(" les courtiers qui ont effectués des ventes > 500 et CB1 > 200")
-st.subheader(" detaitls des VENTES/CB1 :")
+st.subheader(" details des VENTES/CB1 :")
 st.write(new_df)
 
 
