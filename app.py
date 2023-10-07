@@ -33,7 +33,7 @@ def load_data():
 data = load_data()
 
 
-st.title("Application web pour l'analyse de données( en temps rééel )")
+st.title("Application web pour l'analyse de données( en temps réel )")
 
 # Afficher les données dans une table
 st.write("AUTEUR : DJEGUI-WAUE")
@@ -151,7 +151,7 @@ bar_chart.plotly_chart({
             'x': total_ventes['Nom'],
             'y': total_ventes['Ventes'],
             'type': 'bar',
-            'marker': {'color': ['red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red']}  # Vous pouvez spécifier les couleurs ici
+            'marker': {'color': ['red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple']}  # Vous pouvez spécifier les couleurs ici
         }
     ],
     'layout': {
