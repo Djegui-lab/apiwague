@@ -77,6 +77,19 @@ st.write(data_trie)
 
 
 
+# matrice de correlation
+correlation=defo[["Ventes","Fiches","Contrats","CB1","CB2","Prime_mensuelle","TotalFrais"]].corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation,annot=True, cmap='coolwarm',linewidths=0.1)
+st.title("Matrice de corellation :")
+st.subheader("Ventes__Fiches__Contrats_CB1__CB2_Prime_mensuelle_TotalFrais")
+st.pyplot(plt.gcf())
+
+
+
+
+
+
 # Convertir la colonne "Ventes" en nombres entiers
 data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
 
