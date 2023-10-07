@@ -183,11 +183,11 @@ st.subheader("Base de données Sqlite :")
 st.dataframe(df.head())
 descriptives= df.describe()
 
-cursor.execute('''SELECT Nom, Ventes FROM vente WHERE Ventes > (SELECT AVG(Ventes) FROM Vente);''')
+cursor.execute('''SELECT Nom, Ventes FROM vente WHERE Ventes >= (SELECT AVG(Ventes) FROM Vente);''')
 recevoir= cursor.fetchall()
 # Affichez les données dans un DataFrame Streamlit
 new_df = pd.DataFrame(recevoir, columns=[desc[0] for desc in cursor.description])
-st.write(" les courtiers qui ont effectués des ventes > a la moyenne des ventes")
+st.title(" les courtiers qui ont effectués des ventes, ">=",a la moyenne des ventes")
 st.subheader(" details des VENTES/COURTIERS :")
 st.write(new_df)
 
