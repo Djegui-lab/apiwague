@@ -139,7 +139,7 @@ st.write(data)
 # Analyser les données
 st.write("Analyse des ventes par courtier :")
 total_ventes = analyze_data(data)
-st.write(total_ventes)
+
 
 # Créer un graphique à barres avec Pandas
 bar_chart = st.bar_chart(total_ventes.set_index('Nom'))
