@@ -91,13 +91,13 @@ st.pyplot(plt.gcf())
 
 
 # Convertir la colonne "Ventes" en nombres entiers
-data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
+#data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
 
     # Création d'un graphique à barres avec Matplotlib
 # Création d'un graphique à barres avec Matplotlib en spécifiant les couleurs
 colors = ['blue', 'green', 'red', 'purple', 'orange', 'pink', 'brown', 'gray', 'cyan', 'magenta']
 plt.figure(figsize=(10, 6))
-bars = plt.bar(data['Nom'], data['Ventes'], color=colors)
+bars = plt.bar(data_int['Nom'], data_int['Ventes'], color=colors)
 plt.xlabel("Nom")
 plt.ylabel("Chiffre d'affaires (en milliers d'euros)")
 plt.title("Chiffre d'affaires par courtier")
