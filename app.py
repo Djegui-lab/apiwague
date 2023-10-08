@@ -209,6 +209,7 @@ conn.close()
 
 st.write("")
 st.write("")
+st.write("")
 
 
 groupby_column = st.selectbox(
