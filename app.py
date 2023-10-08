@@ -107,7 +107,7 @@ st.pyplot(plt)
 
  # Création d'un graphique à barres horizontal avec Seaborn
 fig, ax = plt.subplots()
-sns.barplot(x='Ventes', y='Nom', data=data,  ax=ax)
+sns.barplot(x='Ventes', y='Nom', data=data_int,  ax=ax)
 ax.set_xlabel("Chiffre d'affaires (en milliers d'euros)")
 ax.set_ylabel('Courtier')
 plt.title("Chiffre d'affaires par courtier")
