@@ -207,6 +207,45 @@ if st.button("AFFICHER LE TOTAL DES VENTES 0CTOBRE-2023"):
 conn.close()
 
 
+st.write("")
+st.write("")
+
+
+groupby_column = st.selectbox(
+    "QU'AIMERIEZ-VOUS ANALYSER ?",
+    (  'Fiches', 'Contrats', 'CB1', 'CB2', 'Prime_mensuelle', 'TotalFrais'),
+)
+
+
+output_columns = ['CB1', 'Ventes']  # Mettez les colonnes que vous voulez ici
+# -- GROUP DATAFRAME
+df_grouped = defo.groupby(by=[groupby_column], as_index=False)[output_columns].mean()
+
+
+fig = px.bar(
+    df_grouped,
+    x=groupby_column,  # Mettez votre colonne ici
+    y='Ventes',  # Modifiez la colonne y si nécessaire
+    color='CB1',  # Modifiez la colonne de couleur si nécessaire
+    color_continuous_scale=['red', 'purple', 'yellow','blue'],
+    template='plotly_white',
+    title=f'<b> VENTES & CB1 by {groupby_column}</b>'
+
+)
+st.subheader("AUTEUR : Mr DJEGUI-WAGUE")
+
+st.plotly_chart(fig)
+
+st.write(f'VENTES & CB1 by {groupby_column} :')
+
+st.dataframe(df_grouped)
+
+
+
+
+
+
+
 
 
 
