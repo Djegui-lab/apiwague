@@ -214,7 +214,7 @@ st.write("")
 
 groupby_column = st.selectbox(
     "QU'AIMERIEZ-VOUS ANALYSER ?",
-    (  'Fiches', 'Contrats', 'CB1', 'CB2', 'Prime_mensuelle', 'TotalFrais'),
+    (  'Fiches', 'ID','Contrats', 'CB1', 'CB2', 'Prime_mensuelle', 'TotalFrais'),
 )
 
 
