@@ -270,7 +270,7 @@ def calcule_statistiques_courtier(Nom):
     conn.close()
 
 # Créez une interface utilisateur avec un selectbox pour la sélection du nom
-selection = st.selectbox("Nom :", df["Nom"].unique(), key='Nom')
+selection = st.selectbox("Courtier :", df["Nom"].unique(), key='Nom')
 
 # Appelez la fonction pour calculer les statistiques en fonction de la sélection
 calcule_statistiques_courtier(selection)
