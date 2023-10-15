@@ -246,6 +246,42 @@ st.dataframe(df_grouped)
 
 
 
+# Fonction pour calculer les statistiques pour un courtier donné
+def calcule_statistiques_courtier(Nom):
+    # Créez une connexion à la base de données (remplacez 'ma_base_de_donnees.db' par le nom de votre base de données)
+    conn = sqlite3.connect('ma_base_de_donnees.db')
+    cursor = conn.cursor()
+
+    # Recherchez l'ID du courtier en fonction de son nom
+    cursor.execute('SELECT ID FROM vente WHERE Nom = ?', (Nom,))
+    result = cursor.fetchone()
+
+    if result:
+        courtier_id = result[0]
+        cursor.execute('SELECT SUM(Ventes), AVG(Ventes), MIN(Ventes), MAX(Ventes), SUM(Fiches), SUM(CB1) FROM vente WHERE ID=?', (courtier_id,))
+        rows = cursor.fetchall()
+        mlp = pd.DataFrame(rows, columns=["Somme des Ventes", "Moyenne des Ventes", "Minimum des ventes", "Maximum des Ventes", "Total_Fiches","Total_CB1"])
+        st.write(f"Statistiques pour {Nom}:")
+        st.write(mlp)
+    else:
+        st.write(f"Aucun résultat trouvé pour le courtier {Nom}.")
+
+    # Fermez la connexion à la base de données
+    conn.close()
+
+# Créez une interface utilisateur avec un selectbox pour la sélection du nom
+selection = st.selectbox("Nom :", df["Nom"].unique(), key='Nom')
+
+# Appelez la fonction pour calculer les statistiques en fonction de la sélection
+calcule_statistiques_courtier(selection)
+#calcule_statistiques_courtier("SOUFIANE")
+#calcule_statistiques_courtier("DJEGUI")
+
+
+
+
+
+
 
 
 
