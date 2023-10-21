@@ -282,6 +282,32 @@ calcule_statistiques_courtier(selection)
 
 
 
+# Regrouper les données par ID et calculer la somme des ventes pour chaque ID
+sales_by_id = data_int.groupby('Nom')['Ventes'].sum().reset_index()
+
+# Liste de couleurs personnalisées pour chaque ID
+custom_colors = ['red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 
+                 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'blue', 'yellow', 'purple']
+
+
+# Créer une application Streamlit
+st.title("Chiffre d'affaires total par ID")
+
+# Créer le graphique interactif à barres avec Plotly et utiliser les couleurs personnalisées
+fig = px.bar(sales_by_id, x='Nom', y='Ventes', labels={'Nom': 'Nom', 'Ventes': "Chiffre d'affaires total (en milliers d'euros)"})
+fig.update_traces(marker=dict(color=custom_colors))  # Utiliser les couleurs personnalisées
+
+# Afficher le graphique interactif
+st.plotly_chart(fig)
+
+# Afficher le tableau de données (en option)
+st.dataframe(sales_by_id)
+
+# Pour exécuter l'application Streamlit, utilisez la commande suivante dans votre terminal :
+# streamlit run nom_du_fichier.py
+st.write(data_int)
+
+
 
 
 
