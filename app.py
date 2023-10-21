@@ -305,7 +305,7 @@ st.dataframe(sales_by_id)
 
 # Pour exécuter l'application Streamlit, utilisez la commande suivante dans votre terminal :
 # streamlit run nom_du_fichier.py
-st.write("Base de données pour chaque nouveau enregistrement : ")
+st.subheader("Base de données pour chaque nouveau enregistrement : ")
 st.write(data_int)
 
 
