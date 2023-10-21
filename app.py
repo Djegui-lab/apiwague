@@ -291,7 +291,7 @@ custom_colors = ['red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'bl
 
 
 # Créer une application Streamlit
-st.title("Chiffre d'affaires total par Courtier")
+st.subheader("Chiffre d'affaires total par Courtier :")
 
 # Créer le graphique interactif à barres avec Plotly et utiliser les couleurs personnalisées
 fig = px.bar(sales_by_id, x='Nom', y='Ventes', labels={'Nom': 'Nom', 'Ventes': "Chiffre d'affaires total (en milliers d'euros)"})
