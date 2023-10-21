@@ -291,7 +291,7 @@ custom_colors = ['red', 'green', 'blue', 'yellow', 'purple', 'red', 'green', 'bl
 
 
 # Créer une application Streamlit
-st.title("Chiffre d'affaires total par ID")
+st.title("Chiffre d'affaires total par Courtier")
 
 # Créer le graphique interactif à barres avec Plotly et utiliser les couleurs personnalisées
 fig = px.bar(sales_by_id, x='Nom', y='Ventes', labels={'Nom': 'Nom', 'Ventes': "Chiffre d'affaires total (en milliers d'euros)"})
@@ -305,6 +305,7 @@ st.dataframe(sales_by_id)
 
 # Pour exécuter l'application Streamlit, utilisez la commande suivante dans votre terminal :
 # streamlit run nom_du_fichier.py
+st.write("Base de données pour chaque nouveau enregistrement : ")
 st.write(data_int)
 
 
