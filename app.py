@@ -182,13 +182,44 @@ st.subheader("Base de données Sqlite :")
 st.dataframe(df.head())
 descriptives= df.describe()
 
-cursor.execute('''SELECT Nom, Ventes FROM vente WHERE Ventes >= (SELECT AVG(Ventes) FROM Vente);''')
-recevoir= cursor.fetchall()
-# Affichez les données dans un DataFrame Streamlit
-new_df = pd.DataFrame(recevoir, columns=[desc[0] for desc in cursor.description])
-st.title(" les courtiers qui ont effectués des ventes >= a la moyenne des ventes")
-st.subheader(" details des VENTES/COURTIERS :")
-st.write(new_df)
+
+
+
+
+# Créez une connexion à la base de données
+conn = sqlite3.connect('ma_base_de_donnees.db')
+cursor = conn.cursor()
+
+# Calculez la moyenne totale de toutes les ventes
+cursor.execute("SELECT AVG(Ventes) FROM Vente")
+moyenne_totale = cursor.fetchone()[0]
+
+# Sélectionnez les noms et les moyennes des ventes pour chaque nom
+cursor.execute("SELECT Nom, AVG(Ventes) FROM Vente GROUP BY Nom")
+
+# Créez une liste pour stocker les résultats
+resultats = []
+
+# Parcourez les résultats et ajoutez les noms dont la moyenne des ventes est supérieure à la moyenne totale à la liste
+for row in cursor.fetchall():
+    nom, moyenne_ventes = row
+    if moyenne_ventes > moyenne_totale:
+        resultats.append({"Nom": nom, "Moyenne des ventes": moyenne_ventes})
+
+# Fermez la connexion à la base de données
+conn.close()
+
+# Affichez les résultats sous forme de tableau avec le widget st.dataframe
+st.write("Les Courtiers dont le chiffre d'affaire moyen est superieur au CA moyen total :")
+if resultats:
+    df = pd.DataFrame(resultats)
+    st.dataframe(df)
+else:
+    st.write("Aucun résultat trouvé.")
+
+
+
+
 
 
 
