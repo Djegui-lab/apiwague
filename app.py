@@ -312,6 +312,40 @@ st.write(data_int)
 
 
 
+# Charger les données à partir d'un fichier CSV (ou de votre source de données)
+
+# Fonction pour l'analyse
+def analyse_courtier(data, nom, colonne_analyse):
+    filtered_data = data_int[data_int['Nom'] == nom]
+    
+    if not filtered_data.empty:
+        st.write(f"Résultats de l'analyse pour '{nom}' dans la colonne {colonne_analyse} :")
+        st.write(filtered_data)
+        
+        # Statistiques récapitulatives pour la colonne choisie
+        st.subheader(f"Statistiques pour '{nom}' dans la colonne {colonne_analyse} :")
+        if colonne_analyse in ['Ventes', 'Fiches', 'CB1', 'CB2','Contrats']:
+            st.write(f"Moyenne de {colonne_analyse} : {filtered_data[colonne_analyse].mean()}")
+            st.write(f"Somme de {colonne_analyse} : {filtered_data[colonne_analyse].sum()}")
+            st.write(f"Médiane de {colonne_analyse} : {filtered_data[colonne_analyse].median()}")
+    else:
+        st.write(f"Aucun résultat trouvé pour le courtier '{nom}' dans la colonne {colonne_analyse}.")
+
+# Titre de l'application
+st.title("Analyse de données robuste :")
+st.title("choisir le courtier en fonction de la colonne que vous souhaitez")
+
+# Choix du nom de courtier
+selected_name = st.selectbox("Choisissez un nom de courtier :", data_int['Nom'].unique(), key="selected_name")
+
+# Choix de la colonne de filtrage
+column_to_filter = st.selectbox("Choisissez la colonne de filtrage :", data_int.columns, key="column_to_filter")
+
+# Appel de la fonction d'analyse
+analyse_courtier(data_int, selected_name, column_to_filter)
+
+
+
 
 
 
