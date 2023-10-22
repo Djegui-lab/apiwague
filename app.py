@@ -92,7 +92,7 @@ st.pyplot(plt.gcf())
 
 
 # Sélection du courtier pour afficher les détails
-selected_courtier = st.selectbox('Sélectionnez un courtier:', data['Nom'])
+selected_courtier = st.selectbox('Sélectionnez un courtier:', data_int['Nom'].unique())
 
 # Affichage des détails du courtier sélectionné
 st.write('Détails du courtier sélectionné:')
