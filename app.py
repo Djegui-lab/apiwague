@@ -222,7 +222,9 @@ else:
 
 
 
-
+# Créez une connexion à la base de données
+conn = sqlite3.connect('ma_base_de_donnees.db')
+cursor = conn.cursor()
 
 tendance_vente=cursor.execute('''SELECT strftime('%Y-%m', datetime('now', 'localtime')) AS mois_actuel, SUM(Ventes) AS total_ventes
 FROM vente;
