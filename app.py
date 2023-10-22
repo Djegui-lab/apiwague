@@ -90,29 +90,6 @@ st.pyplot(plt.gcf())
 
 
 
-# Convertir la colonne "Ventes" en nombres entiers
-#data['Ventes'] = data['Ventes'].str.replace(',', '').astype(int)
-
-    # Création d'un graphique à barres avec Matplotlib
-# Création d'un graphique à barres avec Matplotlib en spécifiant les couleurs
-colors = ['blue', 'green', 'red', 'purple', 'orange', 'pink', 'brown', 'gray', 'cyan', 'magenta']
-plt.figure(figsize=(10, 6))
-bars = plt.bar(data_int['Nom'], data_int['Ventes'], color=colors)
-plt.xlabel("Nom")
-plt.ylabel("Chiffre d'affaires (en milliers d'euros)")
-plt.title("Chiffre d'affaires par courtier")
-plt.xticks(rotation=45, ha="right")
-st.pyplot(plt)
-
-
- # Création d'un graphique à barres horizontal avec Seaborn
-fig, ax = plt.subplots()
-sns.barplot(x='Ventes', y='Nom', data=data_int,  ax=ax)
-ax.set_xlabel("Chiffre d'affaires (en milliers d'euros)")
-ax.set_ylabel('Courtier')
-plt.title("Chiffre d'affaires par courtier")
-st.pyplot(fig)
-
 
 # Sélection du courtier pour afficher les détails
 selected_courtier = st.selectbox('Sélectionnez un courtier:', data['Nom'])
@@ -122,43 +99,6 @@ st.write('Détails du courtier sélectionné:')
 selected_data = data[data['Nom'] == selected_courtier]
 st.write(selected_data)
 
-
-
-
-
-
-# Fonction d'analyse de données
-def analyze_data(data):
-    # Exemple d'analyse : Calcul de la somme des ventes par courtier
-    total_ventes = data.groupby('Nom')['Ventes'].sum().reset_index()
-    return total_ventes
-
-
-
-# Analyser les données
-#st.write("Analyse des ventes par courtier :")
-total_ventes = analyze_data(data)
-
-
-# Créer un graphique à barres avec Pandas
-bar_chart = st.bar_chart(total_ventes.set_index('Nom'))
-
-# Ajouter des couleurs personnalisées au graphique
-bar_chart.plotly_chart({
-    'data': [
-        {
-            'x': total_ventes['Nom'],
-            'y': total_ventes['Ventes'],
-            'type': 'bar',
-            'marker': {'color': ['red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple','red', 'green', 'blue', 'yellow', 'purple']}  # Vous pouvez spécifier les couleurs ici
-        }
-    ],
-    'layout': {
-        'xaxis': {'title': 'Courtier'},
-        'yaxis': {'title': 'Ventes'},
-        'title': 'Ventes par courtier'
-    }
-})
 
 
 
