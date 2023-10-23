@@ -38,8 +38,36 @@ st.title("Application web pour l'analyse de données( en temps réel )")
 # Afficher les données dans une table
 st.write("AUTEUR : DJEGUI-WAUE")
 
+
+
+
+
+
+image_pathe = "djegui_wag.jpg"
+largeur_image = 200
+# Utilisation de st.image pour afficher l'image
+st.sidebar.image(image_pathe, caption="AUTEUR /DJEGUI_WAGUE")
+
+# Image à afficher (le chemin est relatif au script)
+image_path = "djegui_wag.jpg"
+
+# Créer deux colonnes (colonne de gauche et colonne de droite)
+col1, col2 = st.columns([3, 1])
+
+
+# Éléments dans la colonne de droite (affiche l'image)
+with col2:
+    st.image(image_path, caption="AUTEUR / DJEGUI_WAGUE")
+
+
+
+
+
 data=pd.DataFrame(data)
 st.write(data)
+
+
+
 
 
 #convertir tous les colonnes de ma base de données en (int) et ignorer la colonne chaine de caractère
