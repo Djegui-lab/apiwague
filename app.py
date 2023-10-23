@@ -347,12 +347,6 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 
 
 
-# Image à afficher (le chemin est relatif au script)
-image_path = "djegui_wag.jpg"
-
-# Utilisation de st.image pour afficher l'image
-st.sidebar.image(image_path, caption="AUTEUR /DJEGUI_WAGUE")
-
 
 
 
