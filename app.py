@@ -48,6 +48,20 @@ largeur_image = 200
 # Utilisation de st.image pour afficher l'image
 st.sidebar.image(image_pathe, caption="AUTEUR /DJEGUI_WAGUE")
 
+
+st.sidebar.write("Bienvenue dans l'interface utilisateur de mon application d'analyse des données.")
+st.sidebar.write("Avec mon application, vous pouvez explorer et tirer des informations exploitables à partir de vos données stockées. Ma solution combine efficacement récupération, affichage et analyse de données pour vous fournir une compréhension approfondie et des statistiques robustes sur vos opérations.")
+
+st.sidebar.write("Caractéristiques clés :")
+st.sidebar.write("1. Importation de données en un clic : Vous pouvez rapidement importer des données à partir de vos feuilles de calcul, en éliminant les tracas de la préparation des données.")
+st.sidebar.write("2. Visualisation interactive : Notre interface conviviale vous permet de visualiser vos données sous forme de graphiques, de tableaux et de rapports pour une compréhension visuelle.")
+st.sidebar.write("3. Statistiques puissantes : Notre application offre une suite complète d'outils d'analyse statistique, vous permettant d'identifier des tendances, de détecter des modèles et de prendre des décisions éclairées.")
+st.sidebar.write("4. Personnalisation : Vous pouvez personnaliser votre expérience en choisissant les données à analyser et les statistiques à générer en fonction de vos besoins spécifiques.")
+st.sidebar.write("5. Partage de rapports : Vous pouvez partager facilement les résultats de vos analyses avec vos collègues ou collaborateurs pour une collaboration efficace.")
+
+
+
+
 # Image à afficher (le chemin est relatif au script)
 image_path = "djegui_wag.jpg"
 
