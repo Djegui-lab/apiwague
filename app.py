@@ -20,7 +20,7 @@ def load_data():
 
     # Ouvrir la feuille de calcul par son nom ou URL
     # Remplacez "Nom de votre feuille" par le nom de votre propre feuille ou l'URL
-    worksheet = gc.open("courtier").sheet1
+    worksheet = gc.open("Avis-Video-Youtube").sheet1
 
     # Lire les données de la feuille de calcul
     data = worksheet.get_all_values()
