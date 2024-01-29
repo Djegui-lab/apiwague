@@ -5,7 +5,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd 
 import plotly.express as px
-#
+
 
 
 
@@ -214,8 +214,8 @@ FROM vente;
 avoir= cursor.fetchall()
 new_d = pd.DataFrame(avoir, columns=[desc[0] for desc in cursor.description])
 
-if st.button("AFFICHER LE TOTAL DES VENTES Mois Et Année Actuelle"):
-    st.write(new_d)
+if st.button("AFFICHER LE TOTAL DES VENTES"):
+     st.write(new_d)
 
 
 # Fermer la connexion
