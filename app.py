@@ -214,7 +214,7 @@ FROM vente;
 avoir= cursor.fetchall()
 new_d = pd.DataFrame(avoir, columns=[desc[0] for desc in cursor.description])
 
-if st.button("AFFICHER LE TOTAL DES VENTES 0CTOBRE-2023"):
+if st.button("AFFICHER LE TOTAL DES VENTES Mois Et Année Actuelle"):
     st.write(new_d)
 
 
