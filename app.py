@@ -365,9 +365,12 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 
 
 
+import streamlit as st
+import requests
+
 WEBHOOK_URL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjUwNTY4MDYzNzA0MzI1MjY0NTUzNzUxMzci_pc"
 
-# Function to post data to the webhook using argument unpacking
+# Fonction pour envoyer des données au webhook en utilisant l'argument unpacking
 def post_to_webhook(**data):
     response = requests.post(WEBHOOK_URL, json=data)
     return response
@@ -400,6 +403,17 @@ if submit_button:
         response = post_to_webhook(**data)
         if response.status_code == 200:
             st.success("Thanks for your submission! 🌟")
+            
+            # Mettez à jour les statistiques ici en utilisant les données du formulaire
+            # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
+            st.subheader("Statistiques mises à jour en temps réel")
+            st.write(f"Total des fiches : {Fiches}")
+            st.write(f"Total des contrats : {Contrats}")
+            st.write(f"Total des ventes : {Ventes}")
+
+            # Forcer le réexécution de l'application pour la mise à jour en temps réel
+            st.experimental_rerun()
+
         else:
             st.error("There was an error. Please try again. 🛠️")
 
