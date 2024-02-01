@@ -398,30 +398,33 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
     st.session_state.form_state["Email"] = st.text_input("email (optional)", value=st.session_state.form_state["Email"], placeholder="Email_courtier")
 
-    if st.button("Submit Idea 🚀"):
-        if not st.session_state.form_state["Fiches"].strip():
-            st.error("Please enter a video idea. 💡")
+    submit_button = st.form_submit_button(label="Submit Idea 🚀")
+
+# Handle form submission
+if submit_button:
+    if not st.session_state.form_state["Fiches"].strip():
+        st.error("Please enter a video idea. 💡")
+    else:
+        data = st.session_state.form_state
+        response = post_to_webhook(**data)
+        if response.status_code == 200:
+            st.success("Thanks for your submission! 🌟")
+
+            # Réinitialiser les champs du formulaire après la soumission
+            st.session_state.form_state = reset_form_state()
+
+            # Mettez à jour les statistiques ici en utilisant les données du formulaire
+            # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
+            st.subheader("Statistiques mises à jour en temps réel")
+            st.write(f"Total des fiches : {data['Fiches']}")
+            st.write(f"Total des contrats : {data['Contrats']}")
+            st.write(f"Total des ventes : {data['Ventes']}")
+
+            # Forcer le réexécution de l'application pour la mise à jour en temps réel
+            st.experimental_rerun()
+
         else:
-            data = st.session_state.form_state
-            response = post_to_webhook(**data)
-            if response.status_code == 200:
-                st.success("Thanks for your submission! 🌟")
-
-                # Réinitialiser les champs du formulaire après la soumission
-                st.session_state.form_state = reset_form_state()
-
-                # Mettez à jour les statistiques ici en utilisant les données du formulaire
-                # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
-                st.subheader("Statistiques mises à jour en temps réel")
-                st.write(f"Total des fiches : {data['Fiches']}")
-                st.write(f"Total des contrats : {data['Contrats']}")
-                st.write(f"Total des ventes : {data['Ventes']}")
-
-                # Forcer le réexécution de l'application pour la mise à jour en temps réel
-                st.experimental_rerun()
-
-            else:
-                st.error("There was an error. Please try again. 🛠️")
+            st.error("There was an error. Please try again. 🛠️")
 
 # Main content
 st.title("🎬 OBTENIR VOTRE DEVIS ")
