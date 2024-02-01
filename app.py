@@ -387,7 +387,7 @@ def authenticate(username, password):
 # Sidebar content
 st.sidebar.title("Authentification")
 st.sidebar.subheader("Connectez-vous pour l'ajout d'une nouvelle donnée")
-st.subheader.write("Auteur : DJEGUI-WAGUE")
+
 
 # Champ de saisie pour le nom d'utilisateur et le mot de passe
 username = st.sidebar.text_input("Nom d'utilisateur")
