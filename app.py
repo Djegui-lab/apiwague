@@ -413,13 +413,7 @@ if submit_button:
             # Réinitialiser les champs du formulaire après la soumission
             st.session_state.form_state = reset_form_state()
 
-            # Mettez à jour les statistiques ici en utilisant les données du formulaire
-            # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
-            st.subheader("Statistiques mises à jour en temps réel")
-            st.write(f"Total des fiches : {data['Fiches']}")
-            st.write(f"Total des contrats : {data['Contrats']}")
-            st.write(f"Total des ventes : {data['Ventes']}")
-
+            
             # Forcer le réexécution de l'application pour la mise à jour en temps réel
             st.experimental_rerun()
 
