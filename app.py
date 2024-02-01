@@ -383,7 +383,7 @@ def reset_form_state():
             "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
 
 # Fonction pour l'authentification
-def authenticated(username, password):
+def authenticate(username, password):
     # Ici, vous pouvez mettre en place une logique d'authentification simple
     # Par exemple, vérifier si le nom d'utilisateur et le mot de passe sont corrects
     return username == "DJEGUI" and password == "135"
@@ -400,7 +400,7 @@ password = st.sidebar.text_input("Mot de passe", type="password")
 if st.sidebar.button("Se connecter"):
     if authenticate(username, password):
         st.sidebar.success("Authentification réussie!")
-        authenticated = True
+        authenticate = True
     else:
         st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
 
