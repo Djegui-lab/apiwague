@@ -366,14 +366,7 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 import streamlit as st
 import requests
 
-# Main content
-st.title("🎬 OBTENIR VOTRE DEVIS ")
-st.markdown("""
-🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
-""")
-st.markdown("""
-Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
-""")
+
 
 
 
