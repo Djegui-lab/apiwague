@@ -216,7 +216,6 @@ new_d = pd.DataFrame(avoir, columns=[desc[0] for desc in cursor.description])
 
 if st.button("AFFICHER LE TOTAL DES VENTES "):
      st.write(new_d)
-st.write("hello")
 
 # Fermer la connexion
 conn.close()
