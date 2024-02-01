@@ -383,7 +383,7 @@ def reset_form_state():
             "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
 
 # Fonction pour l'authentification
-def authenticate(username, password):
+def authenticated(username, password):
     # Ici, vous pouvez mettre en place une logique d'authentification simple
     # Par exemple, vérifier si le nom d'utilisateur et le mot de passe sont corrects
     return username == "DJEGUI" and password == "135"
