@@ -364,7 +364,6 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 
 
 
-
 import streamlit as st
 import requests
 
@@ -380,16 +379,16 @@ st.sidebar.title("Sidebar")
 
 # Form in the sidebar
 with st.sidebar.form(key="idea_form"):
-    Nom = st.text_input("Name (optional)", placeholder="Your Name")
-    Ventes = st.text_input("VENTES (optional)", placeholder="Vente_journalière")
-    Fiches = st.text_input("FICHES", placeholder="Nombres de Fiches ...")
-    Contrats = st.text_input("contrat (optional)", placeholder="Nombres de contrat souscrit")
-    CB1 = st.text_input("CB1 (optional)", placeholder="Montant CB1")
-    CB2 = st.text_input("CB2 (optional)", placeholder="Montant CB2")
-    Primme_mensuelle = st.text_input("Montant Prime_mensuelle (optional)", placeholder="Prime_mensuelle")
-    TotalFrais = st.text_input("total frais (optional)", placeholder="Montant Frais")
-    ID = st.text_input("ID (optional)", placeholder="Code_courtier")
-    Email = st.text_input("email (optional)", placeholder="Email_courtier")
+    Nom = st.text_input("Name (optional)", key="nom_key", placeholder="Your Name")
+    Ventes = st.text_input("VENTES (optional)", key="ventes_key", placeholder="Vente_journalière")
+    Fiches = st.text_input("FICHES", key="fiches_key", placeholder="Nombres de Fiches ...")
+    Contrats = st.text_input("contrat (optional)", key="contrats_key", placeholder="Nombres de contrat souscrit")
+    CB1 = st.text_input("CB1 (optional)", key="cb1_key", placeholder="Montant CB1")
+    CB2 = st.text_input("CB2 (optional)", key="cb2_key", placeholder="Montant CB2")
+    Primme_mensuelle = st.text_input("Montant Prime_mensuelle (optional)", key="prime_key", placeholder="Prime_mensuelle")
+    TotalFrais = st.text_input("total frais (optional)", key="frais_key", placeholder="Montant Frais")
+    ID = st.text_input("ID (optional)", key="id_key", placeholder="Code_courtier")
+    Email = st.text_input("email (optional)", key="email_key", placeholder="Email_courtier")
 
     submit_button = st.form_submit_button(label="Submit Idea 🚀")
 
@@ -403,7 +402,19 @@ if submit_button:
         response = post_to_webhook(**data)
         if response.status_code == 200:
             st.success("Thanks for your submission! 🌟")
-            
+
+            # Réinitialiser les champs du formulaire après la soumission
+            st.session_state.nom_key = ""
+            st.session_state.ventes_key = ""
+            st.session_state.fiches_key = ""
+            st.session_state.contrats_key = ""
+            st.session_state.cb1_key = ""
+            st.session_state.cb2_key = ""
+            st.session_state.prime_key = ""
+            st.session_state.frais_key = ""
+            st.session_state.id_key = ""
+            st.session_state.email_key = ""
+
             # Mettez à jour les statistiques ici en utilisant les données du formulaire
             # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
             st.subheader("Statistiques mises à jour en temps réel")
