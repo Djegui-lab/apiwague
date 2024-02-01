@@ -400,7 +400,7 @@ password = st.sidebar.text_input("Mot de passe", type="password")
 if st.sidebar.button("Se connecter"):
     if authenticate(username, password):
         st.sidebar.success("Authentification réussie!")
-        authenticate = True
+        authenticated = True
     else:
         st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
 
