@@ -378,47 +378,68 @@ def reset_form_state():
     return {"Nom": "", "Ventes": "", "Fiches": "", "Contrats": "", "CB1": "",
             "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
 
+# Fonction pour l'authentification
+def authenticate(username, password):
+    # Ici, vous pouvez mettre en place une logique d'authentification simple
+    # Par exemple, vérifier si le nom d'utilisateur et le mot de passe sont corrects
+    return username == "DJEGUI" and password == "135"
+
 # Sidebar content
-st.sidebar.title("Sidebar")
+st.sidebar.title("Authentification")
 
-# Initialiser le formulaire dans la session si ce n'est pas déjà fait
-if "form_state" not in st.session_state:
-    st.session_state.form_state = reset_form_state()
+# Champ de saisie pour le nom d'utilisateur et le mot de passe
+username = st.sidebar.text_input("Nom d'utilisateur")
+password = st.sidebar.text_input("Mot de passe", type="password")
 
-# Form in the sidebar
-with st.sidebar.form(key="idea_form"):
-    st.session_state.form_state["Nom"] = st.text_input("Name (optional)", value=st.session_state.form_state["Nom"], placeholder="Your Name")
-    st.session_state.form_state["Ventes"] = st.text_input("VENTES (optional)", value=st.session_state.form_state["Ventes"], placeholder="Vente_journalière")
-    st.session_state.form_state["Fiches"] = st.text_input("FICHES", value=st.session_state.form_state["Fiches"], placeholder="Nombres de Fiches ...")
-    st.session_state.form_state["Contrats"] = st.text_input("contrat (optional)", value=st.session_state.form_state["Contrats"], placeholder="Nombres de contrat souscrit")
-    st.session_state.form_state["CB1"] = st.text_input("CB1 (optional)", value=st.session_state.form_state["CB1"], placeholder="Montant CB1")
-    st.session_state.form_state["CB2"] = st.text_input("CB2 (optional)", value=st.session_state.form_state["CB2"], placeholder="Montant CB2")
-    st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
-    st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
-    st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    st.session_state.form_state["Email"] = st.text_input("email (optional)", value=st.session_state.form_state["Email"], placeholder="Email_courtier")
-
-    submit_button = st.form_submit_button(label="Submit Idea 🚀")
-
-# Handle form submission
-if submit_button:
-    if not st.session_state.form_state["Fiches"].strip():
-        st.error("Please enter a video idea. 💡")
+# Vérifier l'authentification
+if st.sidebar.button("Se connecter"):
+    if authenticate(username, password):
+        st.sidebar.success("Authentification réussie!")
+        authenticated = True
     else:
-        data = st.session_state.form_state
-        response = post_to_webhook(**data)
-        if response.status_code == 200:
-            st.success("Thanks for your submission! 🌟")
+        st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
 
-            # Réinitialiser les champs du formulaire après la soumission
-            st.session_state.form_state = reset_form_state()
+# Si l'utilisateur est authentifié, afficher le formulaire principal
+if authenticated:
+    # Initialiser le formulaire dans la session si ce n'est pas déjà fait
+    if "form_state" not in st.session_state:
+        st.session_state.form_state = reset_form_state()
 
-            
-            # Forcer le réexécution de l'application pour la mise à jour en temps réel
-            st.experimental_rerun()
+    # Form in the sidebar
+    with st.sidebar.form(key="idea_form"):
+        st.session_state.form_state["Nom"] = st.text_input("Name (optional)", value=st.session_state.form_state["Nom"], placeholder="Your Name")
+        st.session_state.form_state["Ventes"] = st.text_input("VENTES (optional)", value=st.session_state.form_state["Ventes"], placeholder="Vente_journalière")
+        st.session_state.form_state["Fiches"] = st.text_input("FICHES", value=st.session_state.form_state["Fiches"], placeholder="Nombres de Fiches ...")
+        st.session_state.form_state["Contrats"] = st.text_input("contrat (optional)", value=st.session_state.form_state["Contrats"], placeholder="Nombres de contrat souscrit")
+        st.session_state.form_state["CB1"] = st.text_input("CB1 (optional)", value=st.session_state.form_state["CB1"], placeholder="Montant CB1")
+        st.session_state.form_state["CB2"] = st.text_input("CB2 (optional)", value=st.session_state.form_state["CB2"], placeholder="Montant CB2")
+        st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
+        st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
+        st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
+        st.session_state.form_state["Email"] = st.text_input("email (optional)", value=st.session_state.form_state["Email"], placeholder="Email_courtier")
 
+        submit_button = st.form_submit_button(label="Submit Idea 🚀")
+
+    # Handle form submission
+    if submit_button:
+        if not st.session_state.form_state["Fiches"].strip():
+            st.error("Please enter a video idea. 💡")
         else:
-            st.error("There was an error. Please try again. 🛠️")
+            data = st.session_state.form_state
+            response = post_to_webhook(**data)
+            if response.status_code == 200:
+                st.success("Thanks for your submission! 🌟")
+
+                # Réinitialiser les champs du formulaire après la soumission
+                st.session_state.form_state = reset_form_state()
+
+               
+
+                # Forcer le réexécution de l'application pour la mise à jour en temps réel
+                st.experimental_rerun()
+
+            else:
+                st.error("There was an error. Please try again. 🛠️")
 
 # Main content
 st.title("🎬 OBTENIR VOTRE DEVIS ")
