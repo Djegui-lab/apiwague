@@ -385,8 +385,8 @@ def authenticate(username, password):
     return username == "DJEGUI" and password == "135"
 
 # Sidebar content
-st.sidebar.title("Authentification")
-st.sidebar.subheader("Connectez-vous pour l'ajout d'une nouvelle donnée")
+st.sidebar.title("Authentification :")
+st.sidebar.subheader("Connectez-vous pour l'ajout d'une nouvelle donnée !")
 
 
 # Champ de saisie pour le nom d'utilisateur et le mot de passe
@@ -399,7 +399,7 @@ if st.sidebar.button("Se connecter"):
         st.sidebar.success("Authentification réussie!")
         authenticated = True
     else:
-        st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
+        st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect, merci de contacteur l'auteur : Mr DJEGUI-WAGUE au numéro : +212605275874.")
         authenticated = False  # Ajoutez cette ligne pour définir la variable
 
 # Vérifier si l'utilisateur est authentifié
