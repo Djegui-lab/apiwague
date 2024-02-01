@@ -379,7 +379,7 @@ def reset_form_state():
             "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
 
 # Sidebar content
-st.sidebar.title("Ajouter une nouvelle donnée🚗")
+st.sidebar.title("Ajouter une nouvelle donnée :🚗")
 
 # Initialiser le formulaire dans la session si ce n'est pas déjà fait
 if "form_state" not in st.session_state:
