@@ -382,10 +382,12 @@ def reset_form_state():
 def authenticate(username, password):
     # Ici, vous pouvez mettre en place une logique d'authentification simple
     # Par exemple, vérifier si le nom d'utilisateur et le mot de passe sont corrects
-    return username == "your_username" and password == "your_password"
+    return username == "DJEGUI" and password == "135"
 
 # Sidebar content
 st.sidebar.title("Authentification")
+st.sidebar.subheader("Connectez-vous pour l'ajout d'une nouvelle donnée")
+st.subheader.write("Auteur : DJEGUI-WAGUE")
 
 # Champ de saisie pour le nom d'utilisateur et le mot de passe
 username = st.sidebar.text_input("Nom d'utilisateur")
