@@ -366,6 +366,17 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 import streamlit as st
 import requests
 
+# Main content
+st.title("🎬 OBTENIR VOTRE DEVIS ")
+st.markdown("""
+🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
+""")
+st.markdown("""
+Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
+""")
+
+
+
 WEBHOOK_URL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjUwNTY4MDYzNzA0MzI1MjY0NTUzNzUxMzci_pc"
 
 # Fonction pour envoyer des données au webhook en utilisant l'argument unpacking
@@ -386,7 +397,7 @@ def authenticate(username, password):
 
 # Sidebar content
 st.sidebar.title("Authentification")
-st.sidebar.subheader("connectez-vous pour ajouter une nouvelle donnée")
+st.sidebar.subheader("🚗Connectez-vous pour ajouter une nouvelle donnée! ")
 
 # Champ de saisie pour le nom d'utilisateur et le mot de passe
 username = st.sidebar.text_input("Nom d'utilisateur")
@@ -442,11 +453,3 @@ if authenticated:
             else:
                 st.error("There was an error. Please try again. 🛠️")
 
-# Main content
-st.title("🎬 OBTENIR VOTRE DEVIS ")
-st.markdown("""
-🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
-""")
-st.markdown("""
-Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
-""")
