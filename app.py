@@ -366,10 +366,6 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 import streamlit as st
 import requests
 
-
-
-
-
 WEBHOOK_URL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjUwNTY4MDYzNzA0MzI1MjY0NTUzNzUxMzci_pc"
 
 # Fonction pour envoyer des données au webhook en utilisant l'argument unpacking
@@ -386,11 +382,10 @@ def reset_form_state():
 def authenticate(username, password):
     # Ici, vous pouvez mettre en place une logique d'authentification simple
     # Par exemple, vérifier si le nom d'utilisateur et le mot de passe sont corrects
-    return username == "DJEGUI" and password == "135"
+    return username == "your_username" and password == "your_password"
 
 # Sidebar content
 st.sidebar.title("Authentification")
-st.sidebar.subheader("🚗Connectez-vous pour ajouter une nouvelle donnée! ")
 
 # Champ de saisie pour le nom d'utilisateur et le mot de passe
 username = st.sidebar.text_input("Nom d'utilisateur")
@@ -400,9 +395,14 @@ password = st.sidebar.text_input("Mot de passe", type="password")
 if st.sidebar.button("Se connecter"):
     if authenticate(username, password):
         st.sidebar.success("Authentification réussie!")
-        authenticated = False
+        authenticated = True
     else:
         st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
+        authenticated = False  # Ajoutez cette ligne pour définir la variable
+
+# Vérifier si l'utilisateur est authentifié
+if "authenticated" not in locals():
+    authenticated = False
 
 # Si l'utilisateur est authentifié, afficher le formulaire principal
 if authenticated:
@@ -438,7 +438,12 @@ if authenticated:
                 # Réinitialiser les champs du formulaire après la soumission
                 st.session_state.form_state = reset_form_state()
 
-               
+                # Mettez à jour les statistiques ici en utilisant les données du formulaire
+                # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
+                st.subheader("Statistiques mises à jour en temps réel")
+                st.write(f"Total des fiches : {data['Fiches']}")
+                st.write(f"Total des contrats : {data['Contrats']}")
+                st.write(f"Total des ventes : {data['Ventes']}")
 
                 # Forcer le réexécution de l'application pour la mise à jour en temps réel
                 st.experimental_rerun()
@@ -446,3 +451,11 @@ if authenticated:
             else:
                 st.error("There was an error. Please try again. 🛠️")
 
+# Main content
+st.title("🎬 OBTENIR VOTRE DEVIS ")
+st.markdown("""
+🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
+""")
+st.markdown("""
+Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
+""")
