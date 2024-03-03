@@ -455,4 +455,5 @@ def contrast_qui_sont_retractés():
     contrats_retractes = [record for record in data if "contrat_retracté" in str(record.values())]
 
     return contrats_retractes
-def contrast_qui_sont_retractés()
+    
+contrast_qui_sont_retractés()
