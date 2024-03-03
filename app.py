@@ -398,7 +398,7 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
     # Multiselect pour Statut-Contrat
     selected_statut_contrat = st.multiselect("Statut-Contrat", ["validé", "retracté"], placeholder="Statut-Contrat")
-    st.session_state.form_state["Statut-Contrat"] = ", ".join(selected_statut_contrat)
+    st.session_state.form_state["Statut-Contrat"] = selected_statut_contrat
 
     submit_button = st.form_submit_button(label="Envoyé 🚀")
 
