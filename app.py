@@ -396,9 +396,13 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    st.session_state.form_state["Statut-Contrat"] =  st.multiselect("Statut-Contrat", ["validé", "retracté"], value=st.session_state.form_state["Statut-Contrat"], placeholder="Statut-Contrat")
+    # Multisélection pour Statut-Contrat
+    selected_statut_contrat = st.multiselect("Statut-Contrat", ["validé", "retracté"], value=st.session_state.form_state["Statut-Contrat"], placeholder="Statut-Contrat")
+    st.session_state.form_state["Statut-Contrat"] = selected_statut_contrat
+    
+    # Ajouter le bouton de soumission
+    submit_button = st.form_submit_button(label="Envoyer 🚀")
 
-    submit_button = st.form_submit_button(label="Envoyé 🚀")
 
 # Handle form submission
 if submit_button:
