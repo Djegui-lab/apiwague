@@ -467,4 +467,14 @@ if st.button("Afficher les Enregistrements de Contrats Retractés"):
     if not contrats_retractes:
         st.info("Aucun enregistrement de contrat rétracté trouvé.")
     else:
-        st.table(contrats_retractes)
+        # Créer un DataFrame à partir des données de contrats rétractés
+        df_contrats_retractes = pd.DataFrame(contrats_retractes)
+
+        # Générer le graphique en barres avec plotly express
+        fig = px.bar(df_contrats_retractes, x='Nom', title='Nombre de Contrats Rétractés par Nom')
+
+        # Afficher le graphique
+        st.plotly_chart(fig)
+
+        # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
+        st.table(df_contrats_retractes)
