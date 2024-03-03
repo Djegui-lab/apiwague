@@ -433,3 +433,26 @@ st.markdown("""
 st.markdown("""
 Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
 """)
+
+
+
+def contrast_qui_sont_retractés():
+    # Définissez les autorisations et l'accès au fichier JSON de clé d'API
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("test-wague-9a205da3c6ca.json", scope)
+
+    # Authentification avec les informations d'identification
+    gc = gspread.authorize(credentials)
+
+    # Ouvrir la feuille de calcul par son nom ou URL
+    # Remplacez "Nom de votre feuille" par le nom de votre propre feuille ou l'URL
+    worksheet = gc.open("courtier").sheet1
+
+    # Lire les données de la feuille de calcul
+    data = worksheet.get_all_records()
+
+    # Filtrer les enregistrements qui contiennent "contrat_retracté"
+    contrats_retractes = [record for record in data if "contrat_retracté" in str(record.values())]
+
+    return contrats_retractes
+def contrast_qui_sont_retractés()
