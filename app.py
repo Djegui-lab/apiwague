@@ -357,39 +357,44 @@ column_to_filter = st.selectbox("Choisissez la colonne de filtrage :", data_int.
 
 # Appel de la fonction d'analyse
 analyse_courtier(data_int, selected_name, column_to_filter)
+
+
+
 import streamlit as st
-import requests
+import gspread
 
-WEBHOOK_URL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjUwNTY4MDYzNzA0MzI1MjY0NTUzNzUxMzci_pc"
+# Charger les informations d'identification de l'API Google Sheets
+credentials = Credentials.from_service_account_file("chemin/vers/votre/credentials.json")
+gc = gspread.authorize(credentials)
+worksheet = gc.open("courtier").sheet1
 
-# Fonction pour envoyer des données au webhook en utilisant l'argument unpacking
-def post_to_webhook(**data):
-    response = requests.post(WEBHOOK_URL, json=data)
-    return response
+# Fonction pour envoyer des données à Google Sheets
+def post_to_google_sheets(**data):
+    worksheet.append_row(list(data.values()))
 
 # Fonction pour réinitialiser les champs du formulaire
 def reset_form_state():
     return {"Nom": "", "Ventes": "", "Fiches": "", "Contrats": "", "CB1": "",
             "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
 
-# Sidebar content
+# Contenu de la barre latérale
 st.sidebar.title("Ajouter une nouvelle donnée :🚗")
 
 # Initialiser le formulaire dans la session si ce n'est pas déjà fait
 if "form_state" not in st.session_state:
     st.session_state.form_state = reset_form_state()
 
-# Form in the sidebar
+# Formulaire dans la barre latérale
 with st.sidebar.form(key="idea_form"):
-    st.session_state.form_state["Nom"] = st.text_input("Name (optional)", value=st.session_state.form_state["Nom"], placeholder="Your Name")
-    st.session_state.form_state["Ventes"] = st.text_input("VENTES (optional)", value=st.session_state.form_state["Ventes"], placeholder="Vente_journalière")
-    st.session_state.form_state["Fiches"] = st.text_input("FICHES", value=st.session_state.form_state["Fiches"], placeholder="Nombres de Fiches ...")
-    st.session_state.form_state["Contrats"] = st.text_input("contrat (optional)", value=st.session_state.form_state["Contrats"], placeholder="Nombres de contrat souscrit")
-    st.session_state.form_state["CB1"] = st.text_input("CB1 (optional)", value=st.session_state.form_state["CB1"], placeholder="Montant CB1")
-    st.session_state.form_state["CB2"] = st.text_input("CB2 (optional)", value=st.session_state.form_state["CB2"], placeholder="Montant CB2")
-    st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
-    st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
-    st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
+    st.session_state.form_state["Nom"] = st.text_input("Nom (facultatif)", value=st.session_state.form_state["Nom"], placeholder="Votre nom")
+    st.session_state.form_state["Ventes"] = st.text_input("VENTES (facultatif)", value=st.session_state.form_state["Ventes"], placeholder="Vente journalière")
+    st.session_state.form_state["Fiches"] = st.text_input("FICHES", value=st.session_state.form_state["Fiches"], placeholder="Nombre de fiches ...")
+    st.session_state.form_state["Contrats"] = st.text_input("Contrat (facultatif)", value=st.session_state.form_state["Contrats"], placeholder="Nombre de contrats souscrits")
+    st.session_state.form_state["CB1"] = st.text_input("CB1 (facultatif)", value=st.session_state.form_state["CB1"], placeholder="Montant CB1")
+    st.session_state.form_state["CB2"] = st.text_input("CB2 (facultatif)", value=st.session_state.form_state["CB2"], placeholder="Montant CB2")
+    st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (facultatif)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime mensuelle")
+    st.session_state.form_state["TotalFrais"] = st.text_input("Total frais (facultatif)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant des frais")
+    st.session_state.form_state["ID"] = st.text_input("ID (facultatif)", value=st.session_state.form_state["ID"], placeholder="Code courtier")
     
     # Utiliser un select pour limiter les choix possibles
     selected_statut_contrat = st.selectbox("Statut-Contrat", ["contrat_validé", "contrat_encours", "contrat_retracté"], index=0)
@@ -398,46 +403,39 @@ with st.sidebar.form(key="idea_form"):
     # Ajouter le bouton de soumission
     submit_button = st.form_submit_button(label="Envoyer 🚀")
 
-
-# Handle form submission
+# Gérer la soumission du formulaire
 if submit_button:
     if not st.session_state.form_state["Fiches"].strip():
-        st.error("Please enter a video idea. 💡")
+        st.error("Veuillez saisir une idée de vidéo. 💡")
     else:
         data = st.session_state.form_state
-        response = post_to_webhook(**data)
-        if response.status_code == 200:
-            st.success("Thanks for your submission! 🌟")
+        post_to_google_sheets(**data)
+        st.success("Merci pour votre soumission ! 🌟")
 
-            # Réinitialiser les champs du formulaire après la soumission
-            st.session_state.form_state = reset_form_state()
+        # Réinitialiser les champs du formulaire après la soumission
+        st.session_state.form_state = reset_form_state()
 
-            # Mettez à jour les statistiques ici en utilisant les données du formulaire
-            # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
-            st.subheader("Statistiques mises à jour en temps réel")
-            st.write(f"Total des fiches : {data['Fiches']}")
-            st.write(f"Total des contrats : {data['Contrats']}")
-            st.write(f"Total des ventes : {data['Ventes']}")
+        # Mettre à jour les statistiques ici en utilisant les données du formulaire
+        # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
+        st.subheader("Statistiques mises à jour en temps réel")
+        st.write(f"Total des fiches : {data['Fiches']}")
+        st.write(f"Total des contrats : {data['Contrats']}")
+        st.write(f"Total des ventes : {data['Ventes']}")
 
-            # Forcer le réexécution de l'application pour la mise à jour en temps réel
-            st.experimental_rerun()
+        # Forcer le réexécution de l'application pour la mise à jour en temps réel
+        st.experimental_rerun()
 
-        else:
-            st.error("There was an error. Please try again. 🛠️")
-
-# Main content
+# Contenu principal
 st.title("🎬 OBTENIR VOTRE DEVIS ") 
 st.markdown("""
 🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
 """)
 st.markdown("""
-Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
+Confidentialité Assurée : Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
 """)
 
-
-
 def contrast_qui_sont_retractés():
-    # Définissez les autorisations et l'accès au fichier JSON de clé d'API
+    # Définir les autorisations et l'accès au fichier JSON de clé d'API
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     credentials = ServiceAccountCredentials.from_json_keyfile_name("test-wague-9a205da3c6ca.json", scope)
 
@@ -455,7 +453,6 @@ def contrast_qui_sont_retractés():
     contrats_retractes = [record for record in data if "contrat_retracté" in str(record.values())]
 
     return contrats_retractes
-
 
 def main():
     # Charger les données
