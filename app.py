@@ -409,7 +409,7 @@ with st.sidebar.form(key="idea_form"):
 # Gérer la soumission du formulaire
 if submit_button:
     if not st.session_state.form_state["Fiches"].strip():
-        st.error("Veuillez saisir une idée de vidéo. 💡")
+        st.error("Veuillez saisir une ligne d'enregistrement 💡")
     else:
         data = st.session_state.form_state
         post_to_google_sheets(**data)
