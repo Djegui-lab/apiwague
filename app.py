@@ -400,16 +400,14 @@ with st.sidebar.form(key="idea_form"):
 # Handle form submission
 if submit_button:
     if not st.session_state.form_state["Fiches"].strip():
-        st.error("Please enter a video idea. 💡")
+        st.error("Please enter un formulaire. 💡")
     else:
         data = st.session_state.form_state
         response = post_to_webhook(**data)
         if response.status_code == 200:
-            st.success("Thanks for your submission! 🌟")
-
             # Réinitialiser les champs du formulaire après la soumission
             st.session_state.form_state = reset_form_state()
-
+            st.success("Thanks for your submission! 🌟")
             # Mettez à jour les statistiques ici en utilisant les données du formulaire
             # Par exemple, vous pouvez afficher les statistiques dans une zone spécifique de votre application
             st.subheader("Statistiques mises à jour en temps réel")
@@ -425,7 +423,7 @@ if submit_button:
 
 
 # Main content
-st.title("🎬 OBTENIR VOTRE DEVIS ")
+st.title("🎬 OBTENIR VOTRE DEVIS ") 
 st.markdown("""
 🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
 """)
