@@ -376,7 +376,7 @@ def post_to_webhook(**data):
 # Fonction pour réinitialiser les champs du formulaire
 def reset_form_state():
     return {"Nom": "", "Ventes": "", "Fiches": "", "Contrats": "", "CB1": "",
-            "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Email": ""}
+            "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Statut-Contrat": ""}
 
 # Sidebar content
 st.sidebar.title("Ajouter une nouvelle donnée :🚗")
@@ -396,9 +396,9 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    st.session_state.form_state["Email"] = st.text_input("email (optional)", value=st.session_state.form_state["Email"], placeholder="Email_courtier")
+    st.session_state.form_state["Email"] =  st.multiselect("Statut-Contrat",["validé", "retracté"], placeholder="Statut-Contrat")
 
-    submit_button = st.form_submit_button(label="Submit Idea 🚀")
+    submit_button = st.form_submit_button(label="Envoyé 🚀")
 
 # Handle form submission
 if submit_button:
