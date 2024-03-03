@@ -363,9 +363,10 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 import streamlit as st
 import gspread
 
-# Charger les informations d'identification de l'API Google Sheets
-credentials = Credentials.from_service_account_file("test-wague-9a205da3c6ca.json")
-gc = gspread.authorize(credentials)
+# Définir les autorisations et l'accès au fichier JSON de clé d'API
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+credentials = ServiceAccountCredentials.from_json_keyfile_name("test-wague-9a205da3c6ca.json", scope)
+
 worksheet = gc.open("courtier").sheet1
 
 # Fonction pour envoyer des données à Google Sheets
