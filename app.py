@@ -392,7 +392,7 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
     
     # Utiliser un select pour limiter les choix possibles
-    selected_statut_contrat = st.selectbox("Statut-Contrat", ["validé", "retracté", "encours"], index=0)
+    selected_statut_contrat = st.selectbox("Statut-Contrat", ["contrat_validé", "contrat_encours", "contrat_retracté"], index=0)
     st.session_state.form_state["Email"] = selected_statut_contrat
     
     # Ajouter le bouton de soumission
