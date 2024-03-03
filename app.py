@@ -364,7 +364,7 @@ import streamlit as st
 import gspread
 
 # Charger les informations d'identification de l'API Google Sheets
-credentials = Credentials.from_service_account_file("chemin/vers/votre/credentials.json")
+credentials = Credentials.from_service_account_file("test-wague-9a205da3c6ca.json")
 gc = gspread.authorize(credentials)
 worksheet = gc.open("courtier").sheet1
 
