@@ -457,18 +457,14 @@ def contrast_qui_sont_retractés():
 
     return contrats_retractes
 
-def main():
-    # Charger les données
+# Ajouter un bouton pour afficher les enregistrements de contrats rétractés
+if st.button("Afficher les Enregistrements de Contrats Retractés"):
     contrats_retractes = contrast_qui_sont_retractés()
 
     # Afficher les enregistrements dans Streamlit
     st.title("Enregistrements de Contrats Retractés")
     
     if not contrats_retractes:
-        st.info("Aucun enregistrement de contrat retracté trouvé.")
+        st.info("Aucun enregistrement de contrat rétracté trouvé.")
     else:
         st.table(contrats_retractes)
-
-if __name__ == "__main__":
-    main()
-
