@@ -360,9 +360,6 @@ analyse_courtier(data_int, selected_name, column_to_filter)
 
 
 
-
-
-
 import streamlit as st
 import requests
 
@@ -376,7 +373,7 @@ def post_to_webhook(**data):
 # Fonction pour réinitialiser les champs du formulaire
 def reset_form_state():
     return {"Nom": "", "Ventes": "", "Fiches": "", "Contrats": "", "CB1": "",
-            "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Statut-Contrat": ""}
+            "CB2": "", "Primme_mensuelle": "", "TotalFrais": "", "ID": "", "Statut-Contrat": []}
 
 # Sidebar content
 st.sidebar.title("Ajouter une nouvelle donnée :🚗")
@@ -396,7 +393,7 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    selected_statut_contrat = st.multiselect("Statut-Contrat", ["validé", "retracté"], placeholder="Statut-Contrat")
+    selected_statut_contrat = st.multiselect("Statut-Contrat", ["validé", "retracté"], default=st.session_state.form_state["Statut-Contrat"], placeholder="Statut-Contrat")
     st.session_state.form_state["Statut-Contrat"] = selected_statut_contrat
     
     # Ajouter le bouton de soumission
@@ -406,12 +403,12 @@ with st.sidebar.form(key="idea_form"):
 # Handle form submission
 if submit_button:
     if not st.session_state.form_state["Fiches"].strip():
-        st.error("Please enter a video idea. 💡")
+        st.error("Veuillez entrer un nombre de fiches valide. 💡")
     else:
         data = st.session_state.form_state
         response = post_to_webhook(**data)
         if response.status_code == 200:
-            st.success("Thanks for your submission! 🌟")
+            st.success("Merci pour votre soumission! 🌟")
 
             # Réinitialiser les champs du formulaire après la soumission
             st.session_state.form_state = reset_form_state()
@@ -427,13 +424,5 @@ if submit_button:
             st.experimental_rerun()
 
         else:
-            st.error("There was an error. Please try again. 🛠️")
+            st.error("Il y a eu une erreur. Veuillez réessayer. 🛠️")
 
-# Main content
-st.title("🎬 OBTENIR VOTRE DEVIS ")
-st.markdown("""
-🚗 Commencez Votre Voyage Sans Souci Aujourd'hui!
-""")
-st.markdown("""
-Confidentialité Assurée: Vos données sont sécurisées et traitées avec la plus grande confidentialité. Urgence Assurances s'engage à protéger vos informations.
-""")
