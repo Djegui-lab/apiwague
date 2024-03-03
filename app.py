@@ -366,6 +366,8 @@ import gspread
 # Définir les autorisations et l'accès au fichier JSON de clé d'API
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name("test-wague-9a205da3c6ca.json", scope)
+# Authentification avec les informations d'identification
+gc = gspread.authorize(credentials)
 
 worksheet = gc.open("courtier").sheet1
 
