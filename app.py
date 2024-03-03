@@ -418,6 +418,7 @@ if submit_button:
             st.write(f"Total des fiches : {data['Fiches']}")
             st.write(f"Total des contrats : {data['Contrats']}")
             st.write(f"Total des ventes : {data['Ventes']}")
+            st.write(f"Statut-Contrat : {data['Statut-Contrat']}")
 
             # Forcer le réexécution de l'application pour la mise à jour en temps réel
             st.experimental_rerun()
