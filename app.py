@@ -393,7 +393,7 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    st.session_state.form_state["Email"] = st.text_input("Emailt(optional)",value=st.session_state.form_state["Email"],placeholder="Email")
+    st.session_state.form_state["Email"] = st.text_input("Email (optional)",value=st.session_state.form_state["Email"],placeholder="Email")
     
     # Ajouter le bouton de soumission
     submit_button = st.form_submit_button(label="Envoyer 🚀")
@@ -418,7 +418,6 @@ if submit_button:
             st.write(f"Total des fiches : {data['Fiches']}")
             st.write(f"Total des contrats : {data['Contrats']}")
             st.write(f"Total des ventes : {data['Ventes']}")
-            st.write(f"Statut-Contrat : {data['Email']}")
 
             # Forcer le réexécution de l'application pour la mise à jour en temps réel
             st.experimental_rerun()
