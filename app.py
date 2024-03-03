@@ -359,7 +359,6 @@ column_to_filter = st.selectbox("Choisissez la colonne de filtrage :", data_int.
 analyse_courtier(data_int, selected_name, column_to_filter)
 
 
-
 import streamlit as st
 import requests
 
@@ -393,11 +392,10 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["Primme_mensuelle"] = st.text_input("Montant Prime_mensuelle (optional)", value=st.session_state.form_state["Primme_mensuelle"], placeholder="Prime_mensuelle")
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
-    st.session_state.form_state["Email"] = st.text_input("Email (optional)",value=st.session_state.form_state["Email"],placeholder="Email")
+    st.session_state.form_state["Email"] = st.text_input("Email (optional)",value=st.session_state.form_state["Email"], placeholder="Email")
     
     # Ajouter le bouton de soumission
     submit_button = st.form_submit_button(label="Envoyer 🚀")
-
 
 # Handle form submission
 if submit_button:
@@ -424,6 +422,7 @@ if submit_button:
 
         else:
             st.error("There was an error. Please try again. 🛠️")
+
 
 # Main content
 st.title("🎬 OBTENIR VOTRE DEVIS ")
