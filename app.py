@@ -359,7 +359,6 @@ column_to_filter = st.selectbox("Choisissez la colonne de filtrage :", data_int.
 analyse_courtier(data_int, selected_name, column_to_filter)
 
 
-
 import streamlit as st
 import requests
 
@@ -394,11 +393,9 @@ with st.sidebar.form(key="idea_form"):
     st.session_state.form_state["TotalFrais"] = st.text_input("total frais (optional)", value=st.session_state.form_state["TotalFrais"], placeholder="Montant Frais")
     st.session_state.form_state["ID"] = st.text_input("ID (optional)", value=st.session_state.form_state["ID"], placeholder="Code_courtier")
     selected_statut_contrat = st.multiselect("Statut-Contrat", ["validé", "retracté"], default=st.session_state.form_state["Statut-Contrat"], placeholder="Statut-Contrat")
-    st.session_state.form_state["Statut-Contrat"] = selected_statut_contrat
     
     # Ajouter le bouton de soumission
     submit_button = st.form_submit_button(label="Envoyer 🚀")
-
 
 # Handle form submission
 if submit_button:
@@ -406,6 +403,8 @@ if submit_button:
         st.error("Veuillez entrer un nombre de fiches valide. 💡")
     else:
         data = st.session_state.form_state
+        # Mise à jour de Statut-Contrat après la soumission
+        data["Statut-Contrat"] = selected_statut_contrat
         response = post_to_webhook(**data)
         if response.status_code == 200:
             st.success("Merci pour votre soumission! 🌟")
@@ -425,4 +424,3 @@ if submit_button:
 
         else:
             st.error("Il y a eu une erreur. Veuillez réessayer. 🛠️")
-
