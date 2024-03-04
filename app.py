@@ -492,7 +492,7 @@ else:
     df_somme_cb1_cb2['Somme_CB1_CB2'] = df_somme_cb1_cb2['CB1'] + df_somme_cb1_cb2['CB2']
 
     # Générer le graphique en barres avec plotly express
-    figure = px.bar(df_somme_cb1_cb2, x='Nom', y='Somme_CB1_CB2', title='Somme de CB1 et CB2 pour Contrats Rétractés par Nom')
+    figure = px.bar(df_somme_cb1_cb2, x='Nom', y='Somme_CB1_CB2', title='Somme de CB1 et CB2 pour Contrats Rétractés par Courtier')
 
     # Afficher le graphique
     st.plotly_chart(figure)
@@ -517,7 +517,7 @@ def somme_cb2_retracte_par_nom(contrats_retractes):
     df_somme_cb2_par_nom = df_contrats_retractes.groupby('Nom')['CB2'].sum().reset_index()
 
     # Générer le graphique en barres avec plotly express
-    fig = px.bar(df_somme_cb2_par_nom, x='Nom', y='CB2', title='Somme de CB2 par cCourtier pour Contrats Rétractés')
+    fig = px.bar(df_somme_cb2_par_nom, x='Nom', y='CB2', title='Somme de CB2 par Courtier pour Contrats Rétractés')
 
     # Afficher le graphique
     st.plotly_chart(fig)
