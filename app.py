@@ -457,28 +457,27 @@ def contrast_qui_sont_retractés():
 
     return contrats_retractes
 
-# Ajouter un bouton pour afficher les enregistrements de contrats rétractés
-if st.button("Afficher les Enregistrements de Contrats Retractés"):
-    contrats_retractes = contrast_qui_sont_retractés()
+# Récupérer les contrats rétractés
+contrats_retractes = contrast_qui_sont_retractés()
 
-    # Afficher les enregistrements dans Streamlit
-    st.title("Enregistrements de Contrats Retractés")
-    
-    if not contrats_retractes:
-        st.info("Aucun enregistrement de contrat rétracté trouvé.")
-    else:
-        # Créer un DataFrame à partir des données de contrats rétractés
-        df_contrats_retractes = pd.DataFrame(contrats_retractes)
+# Afficher les enregistrements dans Streamlit
+st.title("Enregistrements de Contrats Retractés")
 
-        # Grouper par nom et compter le nombre de contrats rétractés par nom
-        df_counts = df_contrats_retractes['Nom'].value_counts().reset_index()
-        df_counts.columns = ['Nom', 'Nombre de Contrats Rétractés']
+if not contrats_retractes:
+    st.info("Aucun enregistrement de contrat rétracté trouvé.")
+else:
+    # Créer un DataFrame à partir des données de contrats rétractés
+    df_contrats_retractes = pd.DataFrame(contrats_retractes)
 
-        # Générer le graphique en barres avec plotly express
-        fig = px.bar(df_counts, x='Nom', y='Nombre de Contrats Rétractés', title='Nombre de Contrats Rétractés par Nom')
+    # Grouper par nom et compter le nombre de contrats rétractés par nom
+    df_counts = df_contrats_retractes['Nom'].value_counts().reset_index()
+    df_counts.columns = ['Nom', 'Nombre de Contrats Rétractés']
 
-        # Afficher le graphique
-        st.plotly_chart(fig)
+    # Générer le graphique en barres avec plotly express
+    fig = px.bar(df_counts, x='Nom', y='Nombre de Contrats Rétractés', title='Nombre de Contrats Rétractés par Nom')
 
-        # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
-        st.table(df_contrats_retractes)
+    # Afficher le graphique
+    st.plotly_chart(fig)
+
+    # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
+    st.table(df_contrats_retractes)
