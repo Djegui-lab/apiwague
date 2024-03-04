@@ -481,3 +481,21 @@ else:
 
     # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
     st.table(df_contrats_retractes)
+
+    
+ # Convertir les colonnes CB1 et CB2 en valeurs numériques
+    df_contrats_retractes['CB1'] = pd.to_numeric(df_contrats_retractes['CB1'], errors='coerce')
+    df_contrats_retractes['CB2'] = pd.to_numeric(df_contrats_retractes['CB2'], errors='coerce')
+
+    # Grouper par nom et calculer la somme de CB1 et CB2 pour chaque nom
+    df_somme_cb1_cb2 = df_contrats_retractes.groupby('Nom')[['CB1', 'CB2']].sum().reset_index()
+    df_somme_cb1_cb2['Somme_CB1_CB2'] = df_somme_cb1_cb2['CB1'] + df_somme_cb1_cb2['CB2']
+
+    # Générer le graphique en barres avec plotly express
+    figure = px.bar(df_somme_cb1_cb2, x='Nom', y='Somme_CB1_CB2', title='Somme de CB1 et CB2 pour Contrats Rétractés par Nom')
+
+    # Afficher le graphique
+    st.plotly_chart(figure)
+
+    # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
+    st.table(df_somme_cb1_cb2)
