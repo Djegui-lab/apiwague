@@ -499,3 +499,40 @@ else:
 
     # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
     st.table(df_somme_cb1_cb2)
+
+
+
+
+
+
+
+def somme_cb2_retracte_par_nom(contrats_retractes):
+    # Créer un DataFrame à partir des données de contrats rétractés
+    df_contrats_retractes = pd.DataFrame(contrats_retractes)
+
+    # Convertir la colonne CB2 en valeurs numériques
+    df_contrats_retractes['CB2'] = pd.to_numeric(df_contrats_retractes['CB2'], errors='coerce')
+
+    # Calculer la somme de CB2 pour les contrats rétractés par nom
+    df_somme_cb2_par_nom = df_contrats_retractes.groupby('Nom')['CB2'].sum().reset_index()
+
+    # Générer le graphique en barres avec plotly express
+    fig = px.bar(df_somme_cb2_par_nom, x='Nom', y='CB2', title='Somme de CB2 par Nom pour Contrats Rétractés')
+
+    # Afficher le graphique
+    st.plotly_chart(fig)
+
+    # Afficher également le tableau (en commentant ou en supprimant cette ligne si vous le souhaitez)
+    st.table(df_somme_cb2_par_nom)
+
+# Récupérer les contrats rétractés
+contrats_retractes = contrast_qui_sont_retractés()
+
+# Afficher les enregistrements dans Streamlit
+st.title("Enregistrements de Contrats Retractés")
+
+if not contrats_retractes:
+    st.info("Aucun enregistrement de contrat rétracté trouvé.")
+else:
+    # Appeler la fonction pour afficher la somme de CB2 par nom et le graphique
+    somme_cb2_retracte_par_nom(contrats_retractes)
