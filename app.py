@@ -470,8 +470,12 @@ if st.button("Afficher les Enregistrements de Contrats Retractés"):
         # Créer un DataFrame à partir des données de contrats rétractés
         df_contrats_retractes = pd.DataFrame(contrats_retractes)
 
+        # Grouper par nom et compter le nombre de contrats rétractés par nom
+        df_counts = df_contrats_retractes['Nom'].value_counts().reset_index()
+        df_counts.columns = ['Nom', 'Nombre de Contrats Rétractés']
+
         # Générer le graphique en barres avec plotly express
-        fig = px.bar(df_contrats_retractes, x='Nom', title='Nombre de Contrats Rétractés par Nom')
+        fig = px.bar(df_counts, x='Nom', y='Nombre de Contrats Rétractés', title='Nombre de Contrats Rétractés par Nom')
 
         # Afficher le graphique
         st.plotly_chart(fig)
