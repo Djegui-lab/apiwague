@@ -535,5 +535,5 @@ if not contrats_retractes:
     st.info("Aucun enregistrement de contrat rétracté trouvé.")
 else:
     # Appeler la fonction pour afficher la somme de CB2 par nom et le graphique
-    st.writre("somme de CB2 retractés par COURTIER")
+    st.write("somme de CB2 retractés par COURTIER")
     somme_cb2_retracte_par_nom(contrats_retractes)
