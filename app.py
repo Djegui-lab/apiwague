@@ -13,7 +13,7 @@ import requests
 def load_data():
     # Définissez les autorisations et l'accès au fichier JSON de clé d'API
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("automatisationsheet-6f0a2195eec8.json", scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("", scope)
 
     # Authentification avec les informations d'identification
     gc = gspread.authorize(credentials)
